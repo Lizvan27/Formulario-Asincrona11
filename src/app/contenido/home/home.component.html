@@ -1,0 +1,52 @@
+<div class="bg-slate-300 p-8 mt-10 w-3/4 mx-auto">
+
+    <div class="w-40">
+        <h1>Formulario</h1>
+        <!--form [formGroup]="form" (submit)="send()"-->
+        <form [formGroup]="formLogin" (submit)="send()">
+    
+            <!-- input nombre -->
+            <div class="my-5 p-3">
+                <label for="Nombre">Nombre</label>
+                <input type="text" id="Nombre" formControlName="Nombre" class="py-1 px-3 rounded" [(ngModel)]="Nombre"
+                (error)="errorNombre">
+            </div>
+            <!-- input email -->
+            <div class="my-5 p-3">
+                <label for="email">Email</label>
+                <input type="text" id="email" formControlName="email" class="py-1 px-3 rounded" [(ngModel)]="email">
+            </div>
+
+            <!-- input mensaje -->
+            <div class="my-5 p-3">
+                <label for="Mensaje">Mensaje</label>
+                <textarea name="Mensaje" id="Mensaje" cols="30" rows="10"  formControlName="Mensaje" [(ngModel)]="Mensaje"></textarea>
+            </div>
+  
+  
+            <!-- Button -->
+            <div class="my-5 py-1 px-3 text-white bg-blue-500 rounded">
+                <button [disabled]="formLogin.invalid">Confirmar</button>
+            </div>
+        </form>
+    </div>
+  
+    <div class="bg-black p-4 text-white text-2xl">
+        {{formLogin.valid}}
+    </div>
+  
+  
+    <div class="bg-black p-4 text-white text-2xl">
+        {{formLogin.value | json}}
+    </div>
+
+
+    <ng-template let-error let-text="text" #errorNombre>
+        <!--{{error | json}} {{text}}-->
+        <b>Error</b>
+        <div *ngIf="error?.minLength(10)">
+            <i>Debe tener como minino 10 caracteres</i>
+        </div>
+    </ng-template>
+  
+  </div>
